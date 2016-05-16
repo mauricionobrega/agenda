@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Aconteceu algo horrível</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Aconteceu algo horrível</h1>
+    <p>{error.message}</p>
+  </body>
+</html>

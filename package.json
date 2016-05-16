@@ -1,0 +1,18 @@
+{
+  "name": "front-end-talk",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "consolidate": "^0.14.1",
+    "cookie-parser": "^1.4.1",
+    "dustjs-linkedin": "^2.7.2",
+    "express": "^4.13.4",
+    "express-load": "^1.1.15",
+    "express-session": "^1.13.0",
+    "method-override": "^2.3.5"
+  }
+}

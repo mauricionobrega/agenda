@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bem vindo</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Bem vindo: {usuario.nome}</h1>
+
+    <form action="/contato" method="post">
+      <input type="text" name="contato[nome]" placeholder="Digite seu nome.">
+      <br>
+      <input type="text" name="contato[email]" placeholder="Digite seu e-mail.">
+      <br>
+      <button type="submit" class="btn btn-success">Cadastrar</button>
+    </form>
+
+    <table>
+      <thead>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Ação</th>
+      </thead>
+      <tbody>
+        {#contatos}
+          <tr>
+            <td>{nome}</td>
+            <td>{email}</td>
+            <td>
+              <a href="/contato/{$idx}">{nome}</a>
+            </td>
+          </tr>
+        {/contatos}
+      </tbody>
+    </table>
+
+  </body>
+</html>

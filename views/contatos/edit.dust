@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bem vindo</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Bem vindo: {usuario.nome}</h1>
+
+    <form action="/contato/{id}?_method=put" method="post">
+      <label>Nome:</label>
+      <input type="text" name="contato[nome]" value="{contato.nome}" placeholder="Digite seu nome.">
+      <br>
+      <label>Email:</label>
+      <input type="text" name="contato[email]" value="{contato.email}" placeholder="Digite seu e-mail.">
+      <br>
+      <button type="submit" class="btn btn-success">Atualizar</button>
+    </form>
+
+  </body>
+</html>

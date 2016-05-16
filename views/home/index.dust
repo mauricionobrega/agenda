@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registro</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Registro</h1>
+    <form action="/entrar" method="post">
+      <input type="hidden" name="_csrf" value="{_csrf}">
+      <input type="text" name="usuario[nome]" placeholder="Digite seu nome.">
+      <br>
+      <input type="text" name="usuario[email]" placeholder="Digite seu e-mail.">
+      <br>
+      <button type="submit" class="btn btn-success">Entrar</button>
+    </form>
+  </body>
+</html>
