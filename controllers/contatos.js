@@ -23,7 +23,7 @@ module.exports = function(app) {
       var contato = request.body.contato,
           usuario = request.session.usuario;
 
-      if (usuario.lenght) {
+      if (usuario) {
         usuario.contatos.push(contato);
       };
 
