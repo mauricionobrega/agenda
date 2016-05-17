@@ -40,23 +40,10 @@ app.use(function(request, response, next) {
 });
 
 load('models').then('middlewares').then('controllers').then('routes').into(app);
+load('sockets').into(io);
 
 app.use(error.notFound);
 app.use(error.serverError);
-
-
-
-io.sockets.on('connection', function(client) {
-
-  client.on('send-server', function(data) {
-    var msg = '<p><strong>'+data.nome+': </strong> '+data.msg+'</p>';
-    client.emit('send-client', msg);
-    client.broadcast.emit('send-client', msg);
-  });
-
-});
-
-
 
 server.listen(3000, function(){
   console.log('Ntalk no ar.');
