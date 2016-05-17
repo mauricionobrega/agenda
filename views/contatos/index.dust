@@ -27,7 +27,8 @@
             <td>{nome}</td>
             <td>{email}</td>
             <td>
-              <a href="/contato/{$idx}">{nome}</a>
+              <a href="/contato/{$idx}">Detalhes de {nome}</a>
+              <a href="/chat">Conversar</a>
             </td>
           </tr>
         {/contatos}

@@ -7,7 +7,9 @@ var express = require('express'),
     error = require('./middlewares/error'),
     dust = require('dustjs-linkedin'),
     consolidate = require('consolidate'),
-    app = express();
+    app = express(),
+    server = require('http').Server(app),
+    io = require('socket.io')(server);
 
 
 app.set('views', __dirname + '/views');
@@ -16,9 +18,6 @@ app.engine('dust', consolidate.dust);
 app.use(express.static(__dirname + '/public'));
 app.use(cookieParser('ntalk'));
 app.use(session({
-  // genid: function(req) {
-  //   return genuuid() // use UUIDs for session IDs
-  // },
   'secret': 'keyboard cat',
   'resave': false,
   'saveUninitialized': false
@@ -45,6 +44,20 @@ load('models').then('middlewares').then('controllers').then('routes').into(app);
 app.use(error.notFound);
 app.use(error.serverError);
 
-app.listen(3000, function(){
+
+
+io.sockets.on('connection', function(client) {
+
+  client.on('send-server', function(data) {
+    var msg = '<p><strong>'+data.nome+': </strong> '+data.msg+'</p>';
+    client.emit('send-client', msg);
+    client.broadcast.emit('send-client', msg);
+  });
+
+});
+
+
+
+server.listen(3000, function(){
   console.log('Ntalk no ar.');
 });
