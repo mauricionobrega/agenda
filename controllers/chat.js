@@ -5,8 +5,6 @@ module.exports = function(app) {
         'sala': request.query.sala
       };
 
-      console.log(params);
-
       response.render('chat/index', params);
     }
   }

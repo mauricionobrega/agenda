@@ -1,6 +1,6 @@
 var socket = io("http://localhost:3000");
 
-socket.emit('join', dataLayer.sala); console.log('js: ', dataLayer.sala);
+socket.emit('join', dataLayer.sala);
 
 socket.on("send-client", function(msg) {
   document.getElementById("chat").innerHTML += msg;

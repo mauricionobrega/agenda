@@ -24,13 +24,14 @@ module.exports = function(io) {
             md5 = crypto.createHash('md5');
         sala = md5.update(timestamp).digest('hex');
       }
-      session.sala=sala;
+      session.sala = sala;
       client.join(sala);
     });
 
     client.on('disconnect', function() {
       client.leave(session.sala);
     });
+
   });
 
 };
