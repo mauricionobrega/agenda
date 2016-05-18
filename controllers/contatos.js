@@ -12,13 +12,15 @@ module.exports = function(app) {
       });
     },
     show: function(request, response) {
-      var id = request.params.id,
-          contato = request.session.usuario.contatos[id],
-          params = {
-            contato: contato,
-            id: id
-          };
-      response.render('contatos/show', params);
+      var _id = request.session.usuario._id;
+      Usuario.findById(_id, function(erro, usuario) {
+        var contatoId = request.params.id,
+            contato = usuario.contatos.id(contatoId),
+            resultado = {
+              'contato': contato
+            };
+        response.render('contatos/show', resultado);
+      });
     },
     create: function(request, response) {
       var _id = request.session.usuario._id;
@@ -32,29 +34,38 @@ module.exports = function(app) {
       });
     },
     edit: function(request, response) {
-      var id = request.params.id,
-          usuario = request.session.usuario,
-          contato = usuario.contatos[id],
-          params = {
-            usuario: usuario,
-            contato: contato,
-            id: id
-          };
-      response.render('contatos/edit', params);
+      var _id = request.session.usuario._id;
+      Usuario.findById(_id, function(erro, usuario) {
+        var contatoId = request.params.id,
+            contato = usuario.contatos.id(contatoId),
+            resultado = {
+              'contato': contato
+            };
+        response.render('contatos/edit', resultado);
+      });
     },
     update: function(request, response) {
-      var contato = request.body.contato,
-          usuario = request.session.usuario;
+      var _id = request.session.usuario._id;
+      Usuario.findById(_id, function(erro, usuario) {
+        var contatoId = request.params.id,
+            contato = usuario.contatos.id(contatoId);
 
-      usuario.contatos[request.params.id] = contato;
-      response.redirect('/contatos');
+        contato.nome = request.body.contato.nome;
+        contato.email = request.body.contato.email;
+        usuario.save(function() {
+          response.redirect('/contatos');
+        });
+      });
     },
     destroy: function(request, response) {
-      var usuario = request.session.usuario,
-          id = request.params.id;
-
-      usuario.contatos.splice(id, 1);
-      response.redirect('/contatos');
+      var _id = request.session.usuario._id;
+      Usuario.findById(_id, function(erro, usuario) {
+        var contatoId = request.params.id;
+        usuario.contatos.id(contatoId).remove();
+        usuario.save(function() {
+          response.redirect('/contatos');
+        });
+      });
     }
   };
 };
