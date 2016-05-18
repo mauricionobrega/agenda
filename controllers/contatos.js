@@ -1,14 +1,15 @@
 module.exports = function(app) {
+  var Usuario = app.models.usuario;
   return {
     index: function(request, response) {
-      var usuario = request.session.usuario,
-          contatos = usuario.contatos,
-          params = {
-            usuario: usuario,
-            contatos: contatos
-          };
-
-      response.render('contatos/index', params);
+      var _id = request.session.usuario._id;
+      Usuario.findById(_id, function(erro, usuario) {
+        var contatos = usuario.contatos,
+            resultado = {
+              'contatos': contatos
+            };
+        response.render('contatos/index', resultado);
+      });
     },
     show: function(request, response) {
       var id = request.params.id,
@@ -20,14 +21,15 @@ module.exports = function(app) {
       response.render('contatos/show', params);
     },
     create: function(request, response) {
-      var contato = request.body.contato,
-          usuario = request.session.usuario;
-
-      if (usuario) {
-        usuario.contatos.push(contato);
-      };
-
-      response.redirect('/contatos');
+      var _id = request.session.usuario._id;
+      Usuario.findById(_id, function(erro, usuario) {
+        var contato = request.body.contato,
+            contatos = usuario.contatos;
+        contatos.push(contato);
+        usuario.save(function() {
+          response.redirect('/contatos');
+        });
+      });
     },
     edit: function(request, response) {
       var id = request.params.id,

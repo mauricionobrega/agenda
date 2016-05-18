@@ -1,10 +1,18 @@
 module.exports = function(io) {
   var crypto = require('crypto'), // TODO: https://github.com/ncb000gt/node.bcrypt.js/
-      sockets = io.sockets;
+      sockets = io.sockets,
+      onlines = {};
 
   sockets.on('connection', function(client) {
     var session = client.handshake.session,
         usuario = session.usuario;
+
+    onlines[usuario.email] = usuario.email;
+
+    for (var email in onlines) {
+      client.emit('notify-onlines', email);
+      client.broadcast.emit('notify-onlines', email);
+    }
 
     client.on('send-server', function(msg) {
       var sala = session.sala,
@@ -29,6 +37,12 @@ module.exports = function(io) {
     });
 
     client.on('disconnect', function() {
+      var sala = session.sala,
+          formattedMsg = '<p><strong>'+usuario.nome+': '+'</strong> saiu</p>';
+
+      client.broadcast.emit('notify-offlines', usuario.email);
+      sockets.in(sala).emit('send-client', formattedMsg);
+      delete onlines[usuario.email];
       client.leave(session.sala);
     });
 

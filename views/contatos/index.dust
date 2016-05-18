@@ -20,15 +20,21 @@
       <thead>
         <th>Nome</th>
         <th>E-mail</th>
+        <th>Status</th>
         <th>Ação</th>
+        <th>Chat</th>
       </thead>
       <tbody>
         {#contatos}
           <tr>
             <td>{nome}</td>
             <td>{email}</td>
+            <td><span id="notify_{email}">Status</span></td>
             <td>
-              <a href="/contato/{$idx}">Detalhes de {nome}</a> | <a href="/chat" id="chat_{email}">Conversar</a>
+              <a href="/contato/{$idx}">Detalhes de {nome}</a>
+            </td>
+            <td>
+              <a href="/chat" id="chat_{email}">Conversar</a>
             </td>
           </tr>
         {/contatos}

@@ -1,8 +1,8 @@
-var socket = io("http://localhost:3000");
+var socket = io('http://localhost:3000');
 
 socket.emit('join', dataLayer.sala);
 
-socket.on("send-client", function(msg) {
+socket.on('send-client', function(msg) {
   document.getElementById("chat").innerHTML += msg;
 });
 
