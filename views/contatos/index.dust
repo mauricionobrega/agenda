@@ -3,6 +3,7 @@
   <head>
     <title>Bem vindo</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    {>"contatos/notify-script" /}
   </head>
   <body>
     <h1>Bem vindo: {usuario.nome}</h1>
@@ -27,8 +28,7 @@
             <td>{nome}</td>
             <td>{email}</td>
             <td>
-              <a href="/contato/{$idx}">Detalhes de {nome}</a>
-              <a href="/chat">Conversar</a>
+              <a href="/contato/{$idx}">Detalhes de {nome}</a> | <a href="/chat" id="chat_{email}">Conversar</a>
             </td>
           </tr>
         {/contatos}

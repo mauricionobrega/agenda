@@ -2,8 +2,10 @@ module.exports = function(app) {
   return {
     index: function(request, response) {
       var params = {
-            usuario: request.session.usuario
-          };
+        'sala': request.query.sala
+      };
+
+      console.log(params);
 
       response.render('chat/index', params);
     }
