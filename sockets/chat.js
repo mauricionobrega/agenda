@@ -7,7 +7,7 @@ module.exports = function(io) {
     var session = client.handshake.session,
         usuario = session.usuario;
 
-    redis.sadd('onlines', ususario.email, function(erro) {
+    redis.sadd('onlines', usuario.email, function(erro) {
       redis.smembers('onlines', function(erro, emails) {
         emails.forEach(function(email) {
           client.emit('notify-onlines', email);

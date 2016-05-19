@@ -10,11 +10,17 @@ var express = require('express'),
     error = require('./middlewares/error'),
     dust = require('dustjs-linkedin'),
     consolidate = require('consolidate'),
+
+    redisAdapter = require('socket.oi-redis'),
+    RedisStore = require('connect-redis')(expressSession),
+
     app = express(),
     server = require('http').Server(app),
     io = require('socket.io')(server),
     cookie = cookieParser(SECRET),
-    store = new expressSession.MemoryStore();
+    store = new RedisStore({
+      'prefix': KEY
+    });
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'dust');
@@ -65,6 +71,11 @@ load('sockets').into(io);
 
 app.use(error.notFound);
 app.use(error.serverError);
+
+io.adapter(redisAdapter({
+  'host': 'localhost',
+  'port': 6379
+}))
 
 server.listen(3000, function(){
   console.log('Ntalk no ar.');

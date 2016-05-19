@@ -1,5 +1,4 @@
 var app = require('../../app'),
-    should = require('should'),
     request = require('supertest')(app);
 
 describe('Describe controller status 200 ao fazer GET /', function(done) {

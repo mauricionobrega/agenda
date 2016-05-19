@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node clusters.js",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha test/**/*.js"
   },
   "dependencies": {
     "bcrypt": "^0.8.6",
     "body-parser": "^1.15.1",
+    "connect-redis": "^3.0.2",
     "consolidate": "^0.14.1",
     "cookie-parser": "^1.4.1",
     "dustjs-linkedin": "^2.7.2",
@@ -19,7 +20,8 @@
     "method-override": "^2.3.5",
     "mongoose": "^4.4.17",
     "redis": "^2.6.0-2",
-    "socket.io": "^1.4.6"
+    "socket.io": "^1.4.6",
+    "socket.io-redis": "^1.0.0"
   },
   "devDependencies": {
     "mocha": "^2.4.5",
