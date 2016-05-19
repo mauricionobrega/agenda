@@ -29,7 +29,7 @@
           <tr>
             <td>{nome}</td>
             <td>{email}</td>
-            <td><span id="notify_{email}">Status</span></td>
+            <td><span id="notify_{email}">Offline</span></td>
             <td>
               <a href="/contato/{_id}">Detalhes de {nome}</a>
             </td>
