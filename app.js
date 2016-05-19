@@ -11,7 +11,7 @@ var express = require('express'),
     dust = require('dustjs-linkedin'),
     consolidate = require('consolidate'),
 
-    redisAdapter = require('socket.oi-redis'),
+    redisAdapter = require('socket.io-redis'),
     RedisStore = require('connect-redis')(expressSession),
 
     app = express(),
