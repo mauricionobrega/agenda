@@ -28,7 +28,8 @@ module.exports = function(app) {
     },
     logout: function(request, response) {
       request.session.destroy();
-      response.render('home/index');
+      // response.render('home/index');
+      response.redirect('/');
     }
   };
 };
