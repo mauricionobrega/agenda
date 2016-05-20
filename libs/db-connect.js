@@ -1,8 +1,13 @@
-module.exports = function() {
   var mongoose = require('mongoose'),
       cfg = require('../config.json'),
       env = process.env.NODE_ENV || 'development',
-      url = cfg.MONGODB[env];
+      url = cfg.MONGODB[env],
+      single_connection;
 
-  return mongoose.connect(url);
+module.exports = function() {
+  if (!single_connection) {
+    single_connection = mongoose.connect(url);
+  }
+
+  return single_connection;
 };
