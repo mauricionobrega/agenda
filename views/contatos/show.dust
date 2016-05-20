@@ -8,6 +8,7 @@
     <h1>Bem vindo: {usuario.nome}</h1>
 
     <form action="/contato/{contato._id}?_method=delete" method="post">
+      <input type="hidden" name="_csrf" value="{_csrf}">
       <label>Nome:</label> {contato.nome}
       <br>
       <label>Email:</label> {contato.email}

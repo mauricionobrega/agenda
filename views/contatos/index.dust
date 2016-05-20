@@ -9,6 +9,7 @@
     <h1>Bem vindo: {usuario.nome}</h1>
 
     <form action="/contato" method="post">
+      <input type="hidden" name="_csrf" value="{_csrf}">
       <input type="text" name="contato[nome]" placeholder="Digite seu nome.">
       <br>
       <input type="text" name="contato[email]" placeholder="Digite seu e-mail.">

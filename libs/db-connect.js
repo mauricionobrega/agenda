@@ -1,9 +1,8 @@
 module.exports = function() {
   var mongoose = require('mongoose'),
-      envUrl = {
-        'test': 'mongodb://localhost:27017/ntalk_test',
-        'development': 'mongodb://localhost:27017/ntalk'
-      },
-      url = envUrl[process.env.NODE_ENV || 'development'];
+      cfg = require('../config.json'),
+      env = process.env.NODE_ENV || 'development',
+      url = cfg.MONGODB[env];
+
   return mongoose.connect(url);
 };
