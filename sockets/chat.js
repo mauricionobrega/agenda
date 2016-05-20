@@ -52,10 +52,17 @@ module.exports = function(io) {
       var sala = session.sala,
           formattedMsg = '<p><strong>'+usuario.nome+': '+'</strong> saiu</p>';
 
+      if(!sala) {
+        var timestamp = new Date().toString(),
+            md5 = crypto.createHash('md5');
+        sala = md5.update(timestamp).digest('hex');
+        session.sala = sala;
+      }
+
       redis.lpush(sala, formattedMsg);
       client.broadcast.emit('notify-offlines', usuario.email);
       sockets.in(sala).emit('send-client', formattedMsg);
-      redis.srem(usuario.email);
+      redis.srem('onlines', usuario.email);
       client.leave(session.sala);
     });
 
