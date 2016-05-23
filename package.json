@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node clusters >> app.log",
+    "start": "DEBUG=* node server",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha test/**/*.js"
   },
   "dependencies": {
